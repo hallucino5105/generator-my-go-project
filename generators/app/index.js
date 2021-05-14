@@ -23,7 +23,7 @@ module.exports = class extends Generator {
           type: "input",
           name: "project_name",
           message: "Input project name.",
-          default: "MyGoTemplate"
+          default: "my_go_template"
         }
       ])
     );
@@ -32,13 +32,15 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    console.log(`pkg/${this.props.project_name}`);
+
     this._copyTarget([
       ["_gitignore", ".gitignore", null],
-      ["go.mod", "go.mod", null],
-      ["reame.md", "readme.md", null],
+      ["go.mod", "go.mod", this.props],
+      ["readme.md", "readme.md", this.props],
 
-      ["pkg/__projectname__", `pkg/${this.props.project_name}`, null],
-      ["cmd/__projectname__", `cmd/${this.props.project_name}`, null],
+      ["pkg/__projectname__", `pkg/${this.props.project_name}`, this.props],
+      ["cmd/__projectname__", `cmd/${this.props.project_name}`, this.props],
       ["cmd/garg", "cmd/garg", null]
     ]);
   }
@@ -58,6 +60,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    this.spawnCommand("go", ["mod", "download"]);
   }
 };

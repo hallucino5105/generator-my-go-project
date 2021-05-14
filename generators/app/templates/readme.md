@@ -1,1 +1,1 @@
-# __projectname__
+# <%= project_name %>

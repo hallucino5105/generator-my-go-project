@@ -1,4 +1,4 @@
-module github.com/hallucino5105/__projectname__
+module github.com/hallucino5105/<%= project_name %>
 
 go 1.14
 

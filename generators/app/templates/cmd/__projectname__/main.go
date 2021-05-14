@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hallucino5105/__projectname__/cmd/garg"
+	"github.com/hallucino5105/<%= project_name %>/cmd/garg"
 	"github.com/hallucino5105/glog"
 )
 
@@ -11,5 +11,5 @@ func init() {
 }
 
 func main() {
-	glog.Debug("__projectname__")
+	glog.Debug("<%= project_name %>")
 }
