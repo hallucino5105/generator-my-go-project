@@ -23,7 +23,7 @@ module.exports = class extends Generator {
           type: "input",
           name: "project_name",
           message: "Input project name.",
-          default: "my_go_template"
+          default: "my_go_project"
         }
       ])
     );
