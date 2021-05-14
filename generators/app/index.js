@@ -29,14 +29,9 @@ module.exports = class extends Generator {
     );
 
     this.props = Object.assign({}, ...this.props);
-
-    console.log("aaa");
   }
 
   writing() {
-    console.log("bbb");
-    console.log(this.copyTarget);
-
     this._copyTarget([
       ["_gitignore", ".gitignore", null],
       ["go.mod", "go.mod", null],
@@ -49,9 +44,6 @@ module.exports = class extends Generator {
   }
 
   _copyTarget(targets) {
-    console.log("ccc");
-    console.log(targets);
-
     for (const t of targets) {
       if (t[2]) {
         this.fs.copyTpl(
