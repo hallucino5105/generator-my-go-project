@@ -74,6 +74,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.spawnCommand("go", ["mod", "download"]);
+    this.spawnCommand("go", ["mod", "tidy"]);
   }
 };
