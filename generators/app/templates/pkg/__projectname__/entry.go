@@ -1,2 +1,2 @@
-package <%= project_name %>
+package <%= project_name_snake_case %>
 

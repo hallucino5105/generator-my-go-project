@@ -3,6 +3,7 @@
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const yosay = require("yosay");
+const _ = require("lodash");
 
 module.exports = class extends Generator {
   async prompting() {
@@ -21,19 +22,22 @@ module.exports = class extends Generator {
       await this.prompt([
         {
           type: "input",
-          name: "project_name",
+          name: "projectName",
           message: "Input project name.",
-          default: "my_go_project"
+          default: "MyGoProject"
         }
       ])
     );
+
+    const { projectName } = _.find(this.props, "projectName");
+    this.props.push({
+      projectNameSnakeCase: _.snakeCase(projectName)
+    });
 
     this.props = Object.assign({}, ...this.props);
   }
 
   writing() {
-    console.log(`pkg/${this.props.project_name}`);
-
     this._copyTarget([
       ["_gitignore", ".gitignore", null],
       ["_editorconfig", ".editorconfig", null],
@@ -41,8 +45,16 @@ module.exports = class extends Generator {
       ["readme.md", "readme.md", this.props],
       ["Makefile", "Makefile", this.props],
 
-      ["pkg/__projectname__", `pkg/${this.props.project_name}`, this.props],
-      ["cmd/__projectname__", `cmd/${this.props.project_name}`, this.props],
+      [
+        "pkg/__projectname__",
+        `pkg/${this.props.projectNameSnakeCase}`,
+        this.props
+      ],
+      [
+        "cmd/__projectname__",
+        `cmd/${this.props.projectNameSnakeCase}`,
+        this.props
+      ],
       ["cmd/garg", "cmd/garg", null]
     ]);
   }
