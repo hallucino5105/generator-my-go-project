@@ -46,8 +46,8 @@ module.exports = class extends Generator {
       ["Makefile", "Makefile", this.props],
 
       [
-        "pkg/__projectname__",
-        `pkg/${this.props.projectNameSnakeCase}`,
+        "pkg/__projectname__/__projectname__.go",
+        `pkg/${this.props.projectNameSnakeCase}/${this.props.projectNameSnakeCase}.go`,
         this.props
       ],
       [
