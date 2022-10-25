@@ -39,8 +39,8 @@ module.exports = class extends Generator {
 
   writing() {
     this._copyTarget([
-      ["_gitignore", ".gitignore", null],
-      ["_editorconfig", ".editorconfig", null],
+      [".gitignore", ".gitignore", null],
+      [".editorconfig", ".editorconfig", null],
       ["go.mod", "go.mod", this.props],
       ["readme.md", "readme.md", this.props],
       ["Makefile", "Makefile", this.props],
@@ -55,20 +55,25 @@ module.exports = class extends Generator {
         `cmd/${this.props.projectNameSnakeCase}`,
         this.props
       ],
+
       ["cmd/garg", "cmd/garg", null]
     ]);
   }
 
   _copyTarget(targets) {
     for (const t of targets) {
-      if (t[2]) {
+      if (t[2] === null) {
+        this.fs.copy(this.templatePath(t[0]), this.destinationPath(t[1]), {
+          globOptions: { dot: true }
+        });
+      } else {
         this.fs.copyTpl(
           this.templatePath(t[0]),
           this.destinationPath(t[1]),
-          t[2]
+          t[2],
+          {},
+          { globOptions: { dot: true } }
         );
-      } else {
-        this.fs.copy(this.templatePath(t[0]), this.destinationPath(t[1]));
       }
     }
   }
